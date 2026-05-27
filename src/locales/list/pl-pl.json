@@ -67,53 +67,6 @@
             "title": "Zablokowani użytkownicy"
         }
     },
-    "explore": {
-        "drawer": {
-            "title": "Odkrywaj",
-            "servers": "Serwery",
-            "bots": "Boty",
-            "themes": "Motywy"
-        },
-        "servers": {
-            "title": "Odkrywaj - Serwery",
-            "noticeMessage": "Serwer może zostać podbity co {{hours}} godziny. Wszystkie podbicia resetują się co {{date}}.",
-            "sortMostBumps": "Najwięcej podbić",
-            "sortMostMembers": "Najwięcej członków",
-            "sortRecentlyAdded": "Ostatnio dodane",
-            "sortRecentlyBumped": "Ostatnio podbite",
-            "filterAll": "Wszystkie",
-            "filterVerified": "Zweryfikowane",
-            "memberCount": "{{count}} członków",
-            "lifetimeBumpCount": "{{count}} wszystkich podbić",
-            "visitServerButton": "Odwiedź",
-            "joinServerButton": "Dołącz",
-            "bumpButton": "Podbij ({{count}})",
-            "moderationNotice": "Serwery nie są moderowane przez Nerimity. Prosimy zgłaszać serwery, które łamią Warunki Użytkowania.",
-            "sortMostActive": "Najbardziej aktywne (beta)",
-            "pinnedServers": "Przypięte serwery",
-            "recentlyBumped": "Ostatnio podbite serwery"
-        },
-        "bots": {
-            "title": "Odkrywaj - Boty",
-            "noticeMessage": "Bot może zostać podbity co {{hours}} godziny. Wszystkie podbicia resetują się co {{date}}.",
-            "moderationNotice": "Boty nie są moderowane przez Nerimity. Prosimy zgłaszać boty, które są złośliwe lub łamią Warunki Użytkowania.",
-            "inviteButton": "Zaproś",
-            "serverCount": "Serwery: {{count}}"
-        },
-        "themes": {
-            "title": "Odkrywaj - Motywy",
-            "themesHeaderDescription": "Dostosuj Nerimity niestandardowym motywem.",
-            "officialThemes": "Oficjalne motywy",
-            "communityThemes": "Motywy od Społeczności",
-            "noCommunityThemes": "Nie ma jeszcze motywów od społeczności.",
-            "fetchThemesError": "Nie udało się wczytać motywów. Spróbuj ponownie później.",
-            "unlockDescription": "Kliknij, aby odkrywać wszystkie motywy od społeczności"
-        },
-        "sort": "Sortowanie",
-        "filter": "Filtrowanie",
-        "by": "Od",
-        "bumped": "Podbito"
-    },
     "servers": {
         "settings": {
             "drawer": {
@@ -131,7 +84,8 @@
                 "audit-logs": "Dziennik zdarzeń",
                 "external-embed": "Zewnętrzne osadzenie",
                 "permissions": "Uprawnienia",
-                "emoji": "Emoji"
+                "emoji": "Emoji",
+                "clanTag": "Tag klanu"
             },
             "general": {
                 "serverRenameNotice": "Jeśli zmienisz nazwę serwera, stracisz jego weryfikację oraz wszystkie korzyści, które z niej płyną.",
@@ -310,6 +264,12 @@
                     "hideMembers": "Ukryj listę członków",
                     "hideActivities": "Ukryj listę aktywności"
                 }
+            },
+            "clans": {
+                "tag": "Tag",
+                "icon": "Ikona",
+                "enableClanTag": "Włącz tag klanu",
+                "verifiedServerOnly": "Tagi klanów są dostępne tylko dla zweryfikowanych serwerów."
             }
         },
         "rolePermissions": {
@@ -370,7 +330,8 @@
             "call-settings": "Ustawienia połączeń",
             "profile": "Profil",
             "source": "Źródło",
-            "changes": "Zmiany"
+            "changes": "Zmiany",
+            "sessions": "Sesje"
         },
         "header": {
             "servers": "serwery",
@@ -635,7 +596,16 @@
             "notice": "Wesprzyj projekt przekazując darowiznę pieniężną.",
             "palestineDescription": "Można ją założyć w ustawieniach profilu",
             "price": "Odznaki za {{price}}",
-            "supportMethods": "Metody wsparcia"
+            "supportMethods": "Metody wsparcia",
+            "acquisitionNotice": "Odznaki są dodawane ręcznie przez moderatorów. Po dokonaniu darowizny prosimy o zgłoszenie, w którym należy podać nazwę odznaki, którą chcesz otrzymać.",
+            "unremovableError": {
+                "title": "Odznaka niezdejmowalna",
+                "body": "Tej ozdnaki nie można zdjąć."
+            },
+            "inventory": {
+                "ownedBadges": "Posiadane odznaki ({{count}})",
+                "acquireDate": "Zdobyto {{date}}"
+            }
         },
         "connections": {
             "thirdParty": {
@@ -644,9 +614,14 @@
                 "unauthorizeButton": "Usuń autoryzację",
                 "unauthorizing": "Usuwanie autoryzacji…"
             },
-            "googleDescription": "Łączenie Twojego konta Google pozwoli Ci na przesyłanie plików na Nerimity. Pliki będą przechowywane na twoim dysku Google Drive.",
+            "googleDescription": "Łączenie Twojego konta Google pozwoli Ci na szybkie i łatwe zalogowanie się za pomocą Google.",
             "linkButton": "Połącz",
-            "unlinkButton": "Odłącz"
+            "unlinkButton": "Odłącz",
+            "googleDriveDescription": "Po połączeniu konta Google będziesz mógł przesyłać pliki na Nerimity. Pliki będą przechowywane na Twoim Dysku Google.",
+            "driveWarning": {
+                "title": "Nie zaleca się używania głównego konta Google do udostępniania lub przechowywania załączników.",
+                "message": "Ze względu na sposób, w jaki interfejs API Dysku Google obsługuje metadane plików, Twoja nazwa wyświetlana i adres e-mail Google są często widoczne w metadanych każdego udostępnianego pliku.\n\nJeśli zdecydujesz się nadal korzystać z Dysku Google, używaj konta tymczasowego."
+            }
         },
         "experiments": {
             "noExperiments": "W tej chwili nie ma żadnych eksperymentów.",
@@ -701,7 +676,8 @@
         "pinMessage": "Przypnij",
         "unpinMessage": "Odepnij",
         "copyHTML": "Kopiuj HTML",
-        "copyMessageLink": "Kopiuj link wiadomości"
+        "copyMessageLink": "Kopiuj link wiadomości",
+        "setReminder": "Ustaw przypomnienie"
     },
     "profile": {
         "followButton": "Obserwuj",
@@ -878,10 +854,6 @@
         "permissions": "Uprawnienia bota",
         "title": "Zaproś bota"
     },
-    "googleAccountLink": {
-        "linking": "Trwa łączenie Twojego konta z usługą Google…",
-        "success": "Konto zostało połączone! Możesz teraz zamknąć to okno."
-    },
     "invite": {
         "loading": "Trwa ładowanie zaproszenia…",
         "invalid": "Niepoprawny kod zaproszeniowy",
@@ -890,7 +862,7 @@
         "visitButton": "Odwiedź",
         "member": "członek",
         "members": "członkowie",
-        "privateEmoji": "Ta emoji pochodzi z prywatnego serwera."
+        "private": "Ten tag należy do prywatnego serwera"
     },
     "fileEmbed": {
         "expired": "Wygasł {{time}}",
@@ -1162,7 +1134,8 @@
         "afk": "Zaraz wracam",
         "dnd": "Nie przeszkadzać",
         "offline": "Nieaktywny",
-        "appearAsOffline": "Wyświetlaj jako nieaktywny"
+        "appearAsOffline": "Wyświetlaj jako nieaktywny",
+        "lastOnline": "Ostatnia aktywność online {{time}}"
     },
     "markup": {
         "bold": "Pogrubienie",
@@ -1256,7 +1229,7 @@
         "searchPlaceholder": "Wyszukaj",
         "backButton": "Wstecz",
         "cancelButton": "Anuluj",
-        "deleteButton": "Wykasuj",
+        "deleteButton": "Usuń",
         "confirmButton": "Potwierdź",
         "doneButton": "Gotowe",
         "saveButton": "Zapisz",
@@ -1362,5 +1335,69 @@
         "dateTime": "{{date}} o {{time}}",
         "error": "błąd",
         "invalidTimezone": "nieprawidłowa strefa czasowa"
+    },
+    "emojiModal": {
+        "title": "Emoji",
+        "defaultEmoji": "Domyśne emoji",
+        "customEmoji": "Własne emoji"
+    },
+    "accountLink": {
+        "linking": "Trwa łączenie Twojego konta z usługą {{service}}…",
+        "success": "Konto połączone! Możesz już zamknąć to okno."
+    },
+    "explore": {
+        "drawer": {
+            "title": "Odkrywaj",
+            "servers": "Serwery",
+            "bots": "Boty",
+            "themes": "Motywy"
+        },
+        "bots": {
+            "title": "Odkrywaj - Boty",
+            "noticeMessage": "Bot może zostać podbity co {{hours}} godziny. Wszystkie podbicia resetują się co {{date}}.",
+            "moderationNotice": "Boty nie są moderowane przez Nerimity. Prosimy zgłaszać boty, które są złośliwe lub łamią Warunki Użytkowania.",
+            "inviteButton": "Zaproś",
+            "serverCount": "Serwery: {{count}}"
+        },
+        "themes": {
+            "title": "Odkrywaj - Motywy",
+            "themesHeaderDescription": "Dostosuj Nerimity niestandardowym motywem.",
+            "officialThemes": "Oficjalne motywy",
+            "communityThemes": "Motywy od Społeczności",
+            "noCommunityThemes": "Nie ma jeszcze motywów od społeczności.",
+            "fetchThemesError": "Nie udało się wczytać motywów. Spróbuj ponownie później.",
+            "unlockDescription": "Kliknij, aby odkrywać wszystkie motywy od społeczności"
+        },
+        "servers": {
+            "title": "Odkrywaj - Serwery",
+            "noticeMessage": "Serwer może zostać podbity co {{hours}} godziny. Wszystkie podbicia resetują się co {{date}}.",
+            "moderationNotice": "Serwery nie są moderowane przez Nerimity. Prosimy zgłaszać serwery, które łamią Warunki Użytkowania.",
+            "sortMostBumps": "Najwięcej podbić",
+            "sortMostMembers": "Najwięcej członków",
+            "sortRecentlyAdded": "Ostatnio dodane",
+            "sortRecentlyBumped": "Ostatnio podbite",
+            "sortMostActive": "Najbardziej aktywne (beta)",
+            "filterAll": "Wszystkie",
+            "filterVerified": "Zweryfikowane",
+            "pinnedServers": "Przypięte serwery",
+            "recentlyBumped": "Ostatnio podbite serwery",
+            "memberCount": "{{count}} członków",
+            "lifetimeBumpCount": "{{count}} wszystkich podbić",
+            "visitServerButton": "Odwiedź",
+            "joinServerButton": "Dołącz",
+            "bumpButton": "Podbij ({{count}})",
+            "filterClans": "Klany"
+        },
+        "bumpModal": {
+            "title": "Podbij {{name}}",
+            "bumpButton": "Podbij"
+        },
+        "sort": "Sortowanie",
+        "filter": "Filtrowanie",
+        "by": "Od",
+        "bumped": "Podbito"
+    },
+    "clanModal": {
+        "title": "Klan"
     }
 }

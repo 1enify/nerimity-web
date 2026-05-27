@@ -133,7 +133,8 @@
             "moderationNotice": "Sunucular Nerimity tarafından denetlenmez. Hizmet Şartlarını ihlal eden sunucuları lütfen bildirin.",
             "sortMostActive": "En Aktif (Beta)",
             "pinnedServers": "Sabitlenmiş Sunucular",
-            "recentlyBumped": "Son Zamanlarda Öne Çıkarılan Sunucular"
+            "recentlyBumped": "Son Zamanlarda Öne Çıkarılan Sunucular",
+            "filterClans": "Klanlar"
         },
         "bots": {
             "title": "Keşfet - Botlar",
@@ -154,7 +155,11 @@
         "sort": "Sırala",
         "filter": "Filtre",
         "by": "Tarafından",
-        "bumped": "Öne Çıkarıldı"
+        "bumped": "Öne Çıkarıldı",
+        "bumpModal": {
+            "bumpButton": "Yükselt",
+            "title": "Yükselt {{name}}"
+        }
     },
     "servers": {
         "settings": {
@@ -173,7 +178,8 @@
                 "notifications": "Bildirimler",
                 "external-embed": "Harici Gömme",
                 "permissions": "İzinler",
-                "emoji": "Emoji"
+                "emoji": "Emoji",
+                "clanTag": "Klan Etiketi"
             },
             "general": {
                 "serverRenameNotice": "Sunucunuzu yeniden adlandırmanız doğrulama avantajlarını kaybetmenize neden olur.",
@@ -352,6 +358,12 @@
                     "hideActivities": "Aktivite Listesini Gizle"
                 },
                 "description": "Websiteniz için harici IFrame yerleştirmesi oluşturun."
+            },
+            "clans": {
+                "tag": "Etiket",
+                "icon": "İkon",
+                "enableClanTag": "Klan Etiketini Etkinleştir",
+                "verifiedServerOnly": "Klan Etiketi sadece onaylanmış sunucular için mevcuttur."
             }
         },
         "rolePermissions": {
@@ -412,7 +424,8 @@
             "profile": "Profil",
             "badges": "Rozetler",
             "source": "Kaynak",
-            "changes": "Değişiklikler"
+            "changes": "Değişiklikler",
+            "sessions": "Oturumlar"
         },
         "header": {
             "servers": "Sunucular",
@@ -604,7 +617,13 @@
             "price": "{{price}} Rozet",
             "supportMethods": "Destek Yöntemleri",
             "inventory": {
-                "ownedBadges": "Sahip Olunan Rozetler ({{count}})"
+                "ownedBadges": "Sahip Olunan Rozetler ({{count}})",
+                "acquireDate": "{{date}} tarihinde elde edildi"
+            },
+            "acquisitionNotice": "Rozetler moderatörler tarafından manuel olarak eklenmektedir. Lütfen bağış yaptıktan sonra, istediğiniz rozeti belirterek bilet açın.",
+            "unremovableError": {
+                "title": "Rozet Çıkartılamaz",
+                "body": "Bu rozet kaldırılamaz."
             }
         },
         "connections": {
@@ -614,9 +633,13 @@
                 "unauthorizeButton": "Yetkiyi Kaldır",
                 "unauthorizing": "Yetki Kaldırılıyor…"
             },
-            "googleDescription": "Google hesabınızı bağlamak, Nerimity'ye dosya yüklemenize olanak tanır. Dosyalar Google Drive'ınızda saklanacaktır.",
+            "googleDescription": "Google hesabınızı bağlamak, Nerimity'ye Google'ı kullanarak hızlı ve kolay giriş yapmanızı sağlar.",
             "linkButton": "Link",
-            "unlinkButton": "Bağlantıyı Kaldır"
+            "unlinkButton": "Bağlantıyı Kaldır",
+            "driveWarning": {
+                "title": "Ekleri paylaşmak veya barındırmak için birincil Google hesabınızı kullanmanız önerilmez."
+            },
+            "googleDriveDescription": "Google hesabınızı bağlamak, Nerimity'ye dosya yüklemenize olanak tanır. Dosyalar Google Drive'ınızda saklanacaktır."
         },
         "activity": {
             "extension": "Tarayıcı Eklentisi",
@@ -650,7 +673,7 @@
                 "documentation": "OAuth2 Dökümantasyonu",
                 "clientId": "İstemci ID",
                 "uri": "URI {{count}}",
-                "clientSecret": "Müşteri Gizli Anahtarı",
+                "clientSecret": "İstemci Sırrı",
                 "secretRefreshed": "Müşteri gizli bilgisi yenilendi.",
                 "secretCopied": "Müşteri gizli anahtarı panoya kopyalandı.",
                 "redirectUris": "Yönlendirme URI'leri",
@@ -844,7 +867,8 @@
             "mostLikedAllTime": "En Çok Beğenilen (Tüm Zamanlar)"
         },
         "replying": "<1>{{username}}<1>  kullanıcısna yanıt veriliyor.",
-        "reposted": "Tekrardan paylaşıldı."
+        "reposted": "Tekrardan paylaşıldı.",
+        "repostedBy": "Yeniden paylaşan"
     },
     "informationDrawer": {
         "channelNotice": "Kanal Hatırlatması",
@@ -884,10 +908,6 @@
         "creator": "Oluşturan: ",
         "title": "Botu Davet Et"
     },
-    "googleAccountLink": {
-        "success": "Hesabın Google ile bağlandı! Bu pencereyi artık kapatabilirsin.",
-        "linking": "Hesabınız Google ile bağlanıyor…"
-    },
     "invite": {
         "joinButton": "Katıl",
         "joiningButton": "Katılınıyor…",
@@ -896,7 +916,7 @@
         "visitButton": "Ziyaret Et",
         "loading": "Davet Yükleniyor…",
         "invalid": "Geçersiz Davet Kodu",
-        "privateEmoji": "Bu emoji özel bir sunucudan geliyor."
+        "private": "Bu özel bir sunucudan"
     },
     "fileEmbed": {
         "viewImage": "Fotoğrafı Görüntüle",
@@ -989,7 +1009,8 @@
         "afk": "Klavye başında değil",
         "dnd": "Rahatsız Etmeyin",
         "offline": "Çevrimdışı",
-        "appearAsOffline": "Çevrimdışı Görün"
+        "appearAsOffline": "Çevrimdışı Görün",
+        "lastOnline": "Son görülme {{time}}"
     },
     "sidePane": {
         "home": "Ev",
@@ -1074,7 +1095,8 @@
     },
     "colorPickerModal": {
         "title": "Renk Seçici",
-        "gradient": "Gradyan"
+        "gradient": "Gradyan",
+        "solid": "Katı"
     },
     "photoEditor": {
         "title": "Fotoğraf Düzenleyici",
@@ -1230,7 +1252,8 @@
             },
             "order": {
                 "ascending": "Artarak",
-                "descending": "Azalarak"
+                "descending": "Azalarak",
+                "header": "Sırala"
             }
         },
         "inVoice": "Sesli aramada",
@@ -1320,8 +1343,8 @@
         "closeNotice": "Önce tüm aktif hatırlatıcıları kapatmalısınız."
     },
     "muteModal": {
-        "title": "{{username}}'yı sessize al?",
-        "message": "",
+        "title": "",
+        "message": "<1>{{username}}</1> bu sunucuda şu süreyle konuşamayacak: <2>{{duration}}</2>",
         "banButton": "Sessize al",
         "banning": "Sessize alınıyor…",
         "reasonLabel": "Sebep (isteğe bağlı)",
@@ -1334,5 +1357,28 @@
         "title": "Hatırlatıcı",
         "setReminderButton": "Hatırlatıcıyı Kur",
         "adding": "Ekleniyor…"
+    },
+    "emojiModal": {
+        "title": "Emoji",
+        "defaultEmoji": "Varsayılan Emoji",
+        "customEmoji": "Özel Emoji"
+    },
+    "accountLink": {
+        "success": "Hesap bağlandı! Bu pencereyi şimdi kapayabilirsiniz.",
+        "linking": "Hesabınız {{service}} ile bağlanıyor…"
+    },
+    "serverDrawer": {
+        "joinedThisSessionNotice": "Bu sunucudan gelen tüm bildirimleri göreceksiniz.",
+        "joinedThisSessionNoticeSetToMentionsOnly": "Sadece bahsetmelere ayarla"
+    },
+    "datetime": {
+        "lessThanAMinuteAgo": "birkaç saniye önce",
+        "relativePast": "{{duration}} önce",
+        "relativeNow": "şimdi",
+        "error": "hata",
+        "invalidTimezone": "geçersiz zaman dilimi"
+    },
+    "clanModal": {
+        "title": "Klan"
     }
 }

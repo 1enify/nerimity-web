@@ -201,12 +201,17 @@
             "moderationNotice": "Nerimity no supervisa ni modera los servidores. Rogamos reportar aquellos que sean maliciosos o infrinjan los Términos de Servicio.",
             "sortMostActive": "Más activos (Beta)",
             "pinnedServers": "Servidores fijados",
-            "recentlyBumped": "Servidores destacados recientemente"
+            "recentlyBumped": "Servidores destacados recientemente",
+            "filterClans": "Clanes"
         },
         "sort": "Ordenar por",
         "filter": "Filtrar por",
         "by": "Por",
-        "bumped": "Destacado"
+        "bumped": "Destacado",
+        "bumpModal": {
+            "title": "Destaca {{name}}",
+            "bumpButton": "Destacar"
+        }
     },
     "editFolderModal": {
         "title": "Editar carpeta",
@@ -232,7 +237,8 @@
                 "notifications": "Notificaciones",
                 "external-embed": "Incrustación externa",
                 "permissions": "Permisos",
-                "emoji": "Emoji"
+                "emoji": "Emoji",
+                "clanTag": "Etiqueta de clan"
             },
             "bans": {
                 "sort": {
@@ -411,6 +417,12 @@
                     "hideMembers": "Esconder lista de miembros",
                     "hideActivities": "Esconder lista de actividad"
                 }
+            },
+            "clans": {
+                "tag": "Etiqueta",
+                "icon": "Icono",
+                "enableClanTag": "Habilitar etiqueta de clan",
+                "verifiedServerOnly": "La etiqueta de clan solo está disponible para servidores verificados."
             }
         },
         "rolePermissions": {
@@ -471,7 +483,8 @@
             "connections": "Conexiones",
             "profile": "Perfil",
             "source": "Código fuente",
-            "changes": "Cambios"
+            "changes": "Cambios",
+            "sessions": "Sesiones"
         },
         "language": {
             "reloadNotice": "Debes recargar la aplicación para aplicar completamente el nuevo idioma.",
@@ -754,9 +767,14 @@
                 "unauthorizeButton": "Unautorizar",
                 "unauthorizing": "Desautorizando…"
             },
-            "googleDescription": "Vincular tu cuenta de Google te permitirá subir archivos a Nerimity. Los archivos se almacenarán en tu Google Drive.",
+            "googleDescription": "Vincular tu cuenta de Google te permitirá iniciar sesión con Google de forma rápida y sencilla.",
             "linkButton": "Vincular",
-            "unlinkButton": "Desvincular"
+            "unlinkButton": "Desvincular",
+            "googleDriveDescription": "Vincular tu cuenta de Google te permitirá subir archivos a Nerimity. Los archivos se almacenarán en tu Google Drive.",
+            "driveWarning": {
+                "title": "No se recomienda utilizar tu cuenta principal de Google para compartir o alojar archivos adjuntos.",
+                "message": "Debido a la forma en que la API de Google Drive gestiona los metadatos de los archivos, tu nombre de usuario y tu dirección de correo electrónico de Google suelen aparecer en los datos de fondo de cualquier archivo que compartas.\n\nUtiliza una cuenta temporal o secundaria si decides seguir usando Google Drive."
+            }
         },
         "experiments": {
             "noExperiments": "No hay experimentos disponibles actualmente.",
@@ -967,10 +985,6 @@
         "permissions": "Permisos del bot",
         "title": "Invitar bot"
     },
-    "googleAccountLink": {
-        "linking": "Vinculando tu cuenta con Google…",
-        "success": "¡Cuenta vinculada! Ahora puedes cerrar esta ventana."
-    },
     "invite": {
         "loading": "Generando invitación…",
         "invalid": "Código de invitación inválido",
@@ -979,7 +993,7 @@
         "visitButton": "Visitar",
         "member": "miembro",
         "members": "miembros",
-        "privateEmoji": "Este emoji procede de un servidor privado."
+        "private": "Esto proviene de un servidor privado"
     },
     "fileEmbed": {
         "expired": "Expirado en {{time}}",
@@ -1157,7 +1171,8 @@
         "afk": "Ausente",
         "dnd": "No molestar",
         "offline": "Fuera de línea",
-        "appearAsOffline": "Aparecer fuera de línea"
+        "appearAsOffline": "Aparecer fuera de línea",
+        "lastOnline": "Última vez en línea: {{time}}"
     },
     "connectionErrorModal": {
         "title": "Error de conexión",
@@ -1371,5 +1386,17 @@
         "dateTime": "{{date}} a las {{time}}",
         "error": "error",
         "invalidTimezone": "zona horaria no válida"
+    },
+    "emojiModal": {
+        "title": "Emoji",
+        "defaultEmoji": "Emoji predeterminado",
+        "customEmoji": "Emoji personalizado"
+    },
+    "accountLink": {
+        "linking": "Vinculando tu cuenta con {{service}}…",
+        "success": "¡Cuenta vinculada! Ya puedes cerrar esta ventana."
+    },
+    "clanModal": {
+        "title": "Clan"
     }
 }

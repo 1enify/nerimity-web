@@ -1,6 +1,5 @@
 import { RawExploreItem } from "@/chat-api/RawData";
 
-import { bannerUrl } from "@/chat-api/store/useServers";
 import useStore from "@/chat-api/store/useStore";
 import RouterEndpoints from "@/common/RouterEndpoints";
 import { useTransContext } from "@nerimity/solid-i18lite";
@@ -36,6 +35,8 @@ import {
 } from "@/chat-api/services/ExploreService";
 
 import { ExplorePageContainer, ExploreSearch } from "./ExplorePane";
+import { ClanTag } from "../clan-tag/ClanTag";
+import { generateUrl } from "@/common/image";
 
 const GridLayout = styled("div")`
   display: grid;
@@ -128,7 +129,8 @@ export default function ExploreServers() {
 
   const filterOpts: DropDownItem[] = [
     { id: "all", label: t("explore.servers.filterAll") },
-    { id: "verified", label: t("explore.servers.filterVerified") }
+    { id: "verified", label: t("explore.servers.filterVerified") },
+    { id: "clans", label: t("explore.servers.filterClans") }
   ];
 
   const update = (newPublicServer: RawExploreItem, index: number) => {
@@ -380,7 +382,7 @@ function PublicServerItem(props: {
           `,
           "banner"
         )}
-        url={bannerUrl(props.publicServer.server!)}
+        url={generateUrl(props.publicServer.server!, "banner")}
         hexColor={props.publicServer.server?.hexColor}
       />
       <Avatar
@@ -397,6 +399,9 @@ function PublicServerItem(props: {
           <Text class={serverNameStyles} size={18} bold>
             {server.name}
           </Text>
+          <Show when={server.clan}>
+            <ClanTag clan={server.clan!} hovered />
+          </Show>
           <Show when={server.verified}>
             <ServerVerifiedIcon />
           </Show>
@@ -549,17 +554,22 @@ export function ServerBumpModal(props: {
         label={t("general.backButton")}
       />
       <Show when={verifyToken()}>
-        <Button iconName="arrow_upward" label="Bump" onClick={bumpServer} />
+        <Button
+          iconName="arrow_upward"
+          label={t("explore.bumpModal.bumpButton")}
+          onClick={bumpServer}
+        />
       </Show>
     </FlexRow>
   );
 
   return (
     <LegacyModal
-      title={`Bump ${
-        props.publicServer.server?.name ||
-        props.publicServer.botApplication?.botUser.username
-      }`}
+      title={t("explore.bumpModal.title", {
+        name:
+          props.publicServer.server?.name ||
+          props.publicServer.botApplication?.botUser.username
+      })}
       close={props.close}
       actionButtons={ActionButtons}
     >

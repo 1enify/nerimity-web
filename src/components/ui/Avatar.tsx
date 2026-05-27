@@ -1,4 +1,3 @@
-import { avatarUrl } from "@/chat-api/store/useUsers";
 import { classNames, cn } from "@/common/classNames";
 import { useWindowProperties } from "@/common/useWindowProperties";
 import {
@@ -27,18 +26,20 @@ import { DogTailBorder } from "../avatar-borders/DogTailBorder";
 import { WolfEarsBorder } from "../avatar-borders/WolfEarBorder";
 import { GoatEarsBorder } from "../avatar-borders/GoatEarBorder";
 import { DeerEarsBorder } from "../avatar-borders/DeerEarBorder";
+import { generateUrl } from "@/common/image";
 
 interface Props {
   url?: string | null;
   size: number;
   class?: string;
   animate?: boolean;
+  rawUrl?: string | null;
   user?: {
     username: string;
     avatar?: string;
     hexColor: string;
     badges?: number;
-    avatarUrl?: string | (() => string | null | undefined) | null;
+    avatarUrl?: string | null;
   };
   server?: {
     name: string;
@@ -76,8 +77,9 @@ export default function Avatar(props: Props) {
   const serverOrUser = () => (props.server || props.user) as ServerOrUserAvatar;
 
   const url = () => {
+    if (props.rawUrl) return props.rawUrl;
     if (typeof props.user?.avatarUrl === "string") return webhookAvatarUrl();
-    const rawUrl = props.url || avatarUrl(serverOrUser());
+    const rawUrl = props.url || generateUrl(serverOrUser(), "avatar");
     if (!rawUrl) return;
     const url = new URL(rawUrl);
 
@@ -99,22 +101,20 @@ export default function Avatar(props: Props) {
     if (!props.user?.avatarUrl) return null;
 
     try {
-      const baseUrl = new URL(props.user.avatarUrl);
-      const ext = baseUrl.pathname.split(".").pop();
+      const animated = props.user.avatarUrl.startsWith("a");
+      const baseUrl = new URL(
+        animated ? props.user.avatarUrl.slice(1) : props.user.avatarUrl
+      );
 
       const proxyUrl = new URL(
         `${env.NERIMITY_CDN}proxy/${encodeURIComponent(
           baseUrl.href
-        )}/avatar.${ext}`
+        )}/avatar.webp`
       );
 
       proxyUrl.searchParams.set("size", props.resize?.toString() || "500");
 
-      if (
-        !proxyUrl.pathname.endsWith(".gif") &&
-        !proxyUrl.pathname.endsWith("#a")
-      )
-        return proxyUrl.href;
+      if (!animated) return proxyUrl.href;
 
       if (!shouldAnimate(hovered()) || !props.animate) {
         proxyUrl.searchParams.set("type", "webp");

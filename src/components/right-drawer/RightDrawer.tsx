@@ -23,7 +23,7 @@ import MemberContextMenu from "../member-context-menu/MemberContextMenu";
 import { DrawerHeader } from "@/components/drawer-header/DrawerHeader";
 import { useCustomPortal } from "@/components/ui/custom-portal/CustomPortal";
 import { css } from "solid-styled-components";
-import useUsers, { bannerUrl, User } from "@/chat-api/store/useUsers";
+import useUsers, { User } from "@/chat-api/store/useUsers";
 import Text from "@/components/ui/Text";
 import Icon from "@/components/ui/icon/Icon";
 import Button from "@/components/ui/Button";
@@ -60,6 +60,8 @@ import { getFont } from "@/common/fonts";
 import { Channel } from "@/chat-api/store/useChannels";
 import { matchSorter } from "match-sorter";
 import { ServerRole } from "@/chat-api/store/useServerRoles";
+import { ClanTag } from "../clan-tag/ClanTag";
+import { generateUrl } from "@/common/image";
 
 const MemberItem = (props: {
   member: ServerMember;
@@ -148,20 +150,26 @@ const MemberItem = (props: {
           user={user()}
         />
         <div class={styles.memberInfo}>
-          <div
-            class={cn(styles.username, font()?.class)}
-            style={{
-              "--gradient":
-                topRoleWithColor()?.gradient || topRoleWithColor()?.hexColor,
-              "--color": topRoleWithColor()?.hexColor!
-            }}
-          >
-            {props.member.nickname || user().username}
-          </div>
+          <span class={styles.memberName}>
+            <span
+              class={cn(styles.username, font()?.class)}
+              style={{
+                "--gradient":
+                  topRoleWithColor()?.gradient || topRoleWithColor()?.hexColor,
+                "--color": topRoleWithColor()?.hexColor!
+              }}
+            >
+              {props.member.nickname || user().username}
+            </span>
+            <Show when={user().profile?.clan}>
+              <ClanTag clan={user().profile?.clan!} hovered={hovering()} />
+            </Show>
+          </span>
           <UserPresence
             class={styles.userPresence}
             tooltipAnchor="left"
             animate={hovering() || !!isProfileFlyoutOpened()}
+            showActivityCount
             userId={user().id}
             showOffline={false}
             hideAction
@@ -508,7 +516,7 @@ const BannerItem = (props: { hovered: boolean }) => {
         brightness={100}
         animate={props.hovered}
         hexColor={bannerData()?.hexColor}
-        url={bannerUrl(bannerData()!)}
+        url={generateUrl(bannerData()!, "banner")}
       />
     </Show>
   );
@@ -594,7 +602,7 @@ const ServerDrawer = () => {
   );
 
   return (
-    <Show when={params.channelId} keyed={true}>
+    <Show when={params.channelId}>
       <Delay ms={10}>
         <div
           style={{ "margin-left": "8px", "margin-top": "8px", display: "flex" }}

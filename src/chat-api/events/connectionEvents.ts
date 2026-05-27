@@ -9,6 +9,7 @@ import useVoiceUsers from "../store/useVoiceUsers";
 import {
   StorageKeys,
   getStorageObject,
+  setStorageString,
   useCollapsedServerCategories
 } from "@/common/localStorage";
 import { ProgramWithExtras, electronWindowAPI } from "@/common/Electron";
@@ -22,6 +23,7 @@ import { type DisconnectDescription } from "socket.io-client/build/esm/socket";
 import { isExperimentEnabled } from "@/common/experiments";
 import { decompressObject } from "@/common/zstd";
 import { log } from "@/common/logger";
+import socketClient from "../socketClient";
 
 // const partial = isExperimentEnabled("WEBSOCKET_PARTIAL_AUTH")();
 const zstd = isExperimentEnabled("WEBSOCKET_ZSTD")();
@@ -78,8 +80,9 @@ export const onReconnectAttempt = () => {
 };
 
 electronWindowAPI()?.activityStatusChanged((window) => {
+  const id = "electron-activity";
   if (!window) {
-    return emitActivityStatus(null);
+    return localRPC.updateRPC(id);
   }
   const programs = getStorageObject<ProgramWithExtras[]>(
     StorageKeys.PROGRAM_ACTIVITY_STATUS,
@@ -90,39 +93,23 @@ electronWindowAPI()?.activityStatusChanged((window) => {
   );
 
   if (!program) {
-    return emitActivityStatus(null);
+    localRPC.updateRPC(id);
   }
 
-  emitActivityStatus({
-    action: program.action || "Playing",
-    name: program.name,
-    startedAt: window.createdAt,
-    emoji: program.emoji
+  localRPC.updateRPC(id, {
+    action: program?.action || "Playing",
+    name: program?.name || "",
+    startedAt: window?.createdAt,
+    emoji: program?.emoji
   });
 });
 
 electronWindowAPI()?.rpcChanged((data) => {
-  if (!data) {
-    const programs = getStorageObject<ProgramWithExtras[]>(
-      StorageKeys.PROGRAM_ACTIVITY_STATUS,
-      []
-    );
-    electronWindowAPI()?.restartActivityStatus(programs);
-    return;
-  }
-  emitActivityStatus({ startedAt: Date.now(), ...data });
+  localRPC.updateElectronRPCs(data);
 });
 
 localRPC.onUpdateRPC = (data) => {
-  if (!data) {
-    emitActivityStatus(null);
-    const programs = getStorageObject<ProgramWithExtras[]>(
-      StorageKeys.PROGRAM_ACTIVITY_STATUS,
-      []
-    );
-    electronWindowAPI()?.restartActivityStatus(programs);
-  }
-  emitActivityStatus({ startedAt: Date.now(), ...data });
+  emitActivityStatus(data.map((data) => ({ startedAt: Date.now(), ...data })));
 };
 
 export const onAuthenticated = (payload: AuthenticatedPayload) => {
@@ -131,7 +118,12 @@ export const onAuthenticated = (payload: AuthenticatedPayload) => {
     payload = decompressObject<AuthenticatedPayload>(new Uint8Array(payload));
     log("WebSocket", "Decompression took", performance.now() - t, "ms");
   }
-
+  socketClient.setSessionId(payload.sessionId);
+  if (payload.newToken) {
+    setStorageString(StorageKeys.USER_TOKEN, payload.newToken);
+    socketClient.updateToken(payload.newToken);
+    log("WebSocket", "Updated token.");
+  }
   const {
     account,
     servers,
@@ -258,10 +250,10 @@ export const onAuthenticated = (payload: AuthenticatedPayload) => {
     StorageKeys.PROGRAM_ACTIVITY_STATUS,
     []
   );
+  localRPC.start();
   electronWindowAPI()?.restartActivityStatus(programs);
 
   electronWindowAPI()?.restartRPCServer();
-  localRPC.start();
   useDiscordActivityTracker().restart();
   useLastFmActivityTracker().restart();
 

@@ -1,5 +1,5 @@
 import style from "./DashboardPane.module.css";
-import { RawPost } from "@/chat-api/RawData";
+import { ActivityStatus, RawPost } from "@/chat-api/RawData";
 import {
   getAnnouncementPosts,
   getPostNotificationCount,
@@ -37,6 +37,7 @@ import { emojiToUrl } from "@/common/emojiToUrl";
 import { useLocalStorage } from "@/common/localStorage";
 import { getActivityType } from "@/common/activityType";
 import { PostItem } from "./post-area/PostItem";
+import { reconcile } from "solid-js/store";
 
 export default function DashboardPane() {
   const { header, account } = useStore();
@@ -82,7 +83,7 @@ const Announcements = () => {
       }
     });
 
-    setPosts(posts);
+    setPosts(reconcile([...posts]));
   });
   return (
     <Show when={posts().length}>
@@ -296,16 +297,21 @@ const ActivityList = () => {
     activityListEl.scrollLeft += event.deltaX;
   };
 
-  const activities = () => {
+  const presences = () => {
     const presences = store.users.presencesArray();
     return presences
       .filter(
         (p) =>
-          p.activity &&
+          p.activities?.length &&
           !users.get(p.userId)?.bot &&
           !store.friends.hasBeenBlockedByMe(p.userId)
       )
-      .sort((a, b) => b.activity!.startedAt - a.activity!.startedAt);
+      .map((p) => ({
+        ...p,
+        activities: [...(p.activities ?? [])].sort(
+          (a, b) => b!.startedAt - a!.startedAt
+        )
+      }));
   };
 
   const authenticatedInPast = () => account.lastAuthenticatedAt();
@@ -331,7 +337,7 @@ const ActivityList = () => {
         </Skeleton.List>
       </Show>
 
-      <Show when={authenticatedInPast() && !activities().length}>
+      <Show when={authenticatedInPast() && !presences().length}>
         <div class={style.noActivity}>
           <Text size={14} opacity={0.6}>
             {t("dashboard.noActiveUsers")}
@@ -339,20 +345,29 @@ const ActivityList = () => {
         </div>
       </Show>
 
-      <Show when={authenticatedInPast() && activities().length}>
-        <For each={activities()}>
-          {(activity) => <PresenceItem presence={activity} />}
+      <Show when={authenticatedInPast() && presences().length}>
+        <For each={presences()}>
+          {(presence) => (
+            <For each={presence.activities}>
+              {(activity) => (
+                <PresenceItem presence={presence} activity={activity} />
+              )}
+            </For>
+          )}
         </For>
       </Show>
     </div>
   );
 };
 
-const PresenceItem = (props: { presence: Presence }) => {
+const PresenceItem = (props: {
+  presence: Presence;
+  activity: ActivityStatus;
+}) => {
   const navigate = useNavigate();
   const store = useStore();
 
-  const activity = () => props.presence.activity!;
+  const activity = () => props.activity;
 
   const user = () => {
     return store.users.get(props.presence.userId);
@@ -416,7 +431,7 @@ const PresenceItem = (props: { presence: Presence }) => {
           />
           <Text size={14} opacity={0.7}>
             {" "}
-            {props.presence.activity?.name}
+            {props.activity?.name}
           </Text>
         </span>
 

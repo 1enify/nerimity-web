@@ -21,7 +21,7 @@
             "feature4": "Créez des publications sur votre profil",
             "feature5": "Trouvez votre propre communauté",
             "feature7": "Fonctionne grâce aux dons",
-            "feature8": "Code source complet sur GItHub"
+            "feature8": "Code source complet sur GitHub"
         }
     },
     "loginPage": {
@@ -67,53 +67,6 @@
             "title": "Utilisateurs bloqués"
         }
     },
-    "explore": {
-        "drawer": {
-            "title": "Explorer",
-            "servers": "Serveurs",
-            "bots": "Bots",
-            "themes": "Thèmes"
-        },
-        "servers": {
-            "title": "Explorer les serveurs",
-            "noticeMessage": "Un serveur peut être bump une fois toutes les {{hours}} heures. Les bumps sont réinitialisés tous les {{date}}.",
-            "sortMostBumps": "Plus de bumps",
-            "sortMostMembers": "Plus de membres",
-            "sortRecentlyAdded": "Récemment ajouté",
-            "sortRecentlyBumped": "Récemment bump",
-            "filterAll": "Tous",
-            "filterVerified": "Vérifié",
-            "memberCount": "{{count}} membres",
-            "lifetimeBumpCount": "{{count}} bumps totaux",
-            "visitServerButton": "Visiter",
-            "joinServerButton": "Rejoindre",
-            "bumpButton": "Bump ({{count}})",
-            "moderationNotice": "Les serveurs ne sont pas modérés par Nerimity. Veuillez signaler les serveurs qui enfreignent les conditions d'utilisation.",
-            "sortMostActive": "Les plus actifs (Bêta)",
-            "pinnedServers": "Serveurs épinglés",
-            "recentlyBumped": "Serveurs récemment mis à jour"
-        },
-        "bots": {
-            "inviteButton": "Inviter",
-            "title": "Explorer - Bots",
-            "noticeMessage": "Un bot peut être bump toutes les {{hours}} heures. Tous les bumps sont réinitialisées chaque {{date}}.",
-            "moderationNotice": "Les bots ne sont pas modérés par Nerimity. Veuillez signaler les bots malveillants ou qui enfreignent les conditions d'utilisation.",
-            "serverCount": "Dans {{count}} serveurs"
-        },
-        "themes": {
-            "title": "Explorer - Thèmes",
-            "themesHeaderDescription": "Personnalisez Nerimity avec un thème personnalisé.",
-            "officialThemes": "Thèmes officiels",
-            "communityThemes": "Thèmes de la communauté",
-            "noCommunityThemes": "Aucun thème communautaire trouvé.",
-            "fetchThemesError": "Impossible de récupérer les thèmes. Veuillez réessayer plus tard.",
-            "unlockDescription": "Cliquez pour explorer tous les thèmes de la communauté"
-        },
-        "by": "Par",
-        "bumped": "Bump",
-        "sort": "Trier",
-        "filter": "Filtrer"
-    },
     "servers": {
         "settings": {
             "drawer": {
@@ -131,7 +84,8 @@
                 "welcome-screen": "Écran de bienvenue",
                 "external-embed": "Intégration externe",
                 "permissions": "Autorisations",
-                "emoji": "Émoji"
+                "emoji": "Émoji",
+                "clanTag": "Tag de clan"
             },
             "general": {
                 "serverRenameNotice": "Vous perdrez tous les avantages de faire vérifier votre serveur si vous le renommez.",
@@ -199,7 +153,7 @@
                 "public": "Public",
                 "publicDescription": "Rendre ce serveur public.",
                 "bumpServer": "Bump le Serveur",
-                "bumpServerDescription": "Bump this server to get to the top.",
+                "bumpServerDescription": "Faites remonter ce serveur pour qu'il atteigne le sommet.",
                 "publishServerButton": "Publier",
                 "unpublishServerButton": "Annuler la publication",
                 "bumpButton": "Bump ({{count}})",
@@ -268,7 +222,7 @@
                 "questions": {
                     "addButton": "Ajouter question",
                     "question": "Question",
-                    "questionPlaceholder": "Chats ou chiens?",
+                    "questionPlaceholder": "Chats ou chiens ?",
                     "multiselect": "Sélection multiple"
                 },
                 "answers": {
@@ -310,6 +264,12 @@
                     "hideMembers": "Masquer la liste des membres",
                     "hideActivities": "Masquer la liste d'activités"
                 }
+            },
+            "clans": {
+                "tag": "Tag",
+                "icon": "Icone",
+                "enableClanTag": "Activer le tag du clan",
+                "verifiedServerOnly": "Le tag de clan est seulement pour les serveurs vérifiés."
             }
         },
         "rolePermissions": {
@@ -370,7 +330,8 @@
             "connections": "Relations",
             "profile": "Profil",
             "source": "Source",
-            "changes": "Changements"
+            "changes": "Changements",
+            "sessions": "Sessions"
         },
         "header": {
             "servers": "serveurs",
@@ -454,15 +415,24 @@
             "inAppPreview": "Dans l'aperçu de l'application",
             "inAppPreviewDescription": "Afficher les notifications contextuelles dans l'application.",
             "mute": "Muet",
-            "callJoin": "Rejoindre Appel",
-            "callLeave": "Quitter Appel"
+            "callJoin": "Appel rejoint",
+            "callLeave": "Appel raccroché"
         },
         "badges": {
             "noticeTitle": "Dons",
             "notice": "Soutenez ce projet en faisant un don.",
             "palestineDescription": "Peut être équipé en allant dans les paramètres de profil",
             "price": "{{price}} Badges",
-            "supportMethods": "Méthodes d'assistance"
+            "supportMethods": "Méthodes d'assistance",
+            "acquisitionNotice": "Les badges sont ajoutés manuellement par les modérateurs. Veuillez ouvrir un ticket en précisant le badge souhaité après avoir fait un don.",
+            "unremovableError": {
+                "title": "Insigne non retirable",
+                "body": "Ce badge ne peut pas être retiré."
+            },
+            "inventory": {
+                "ownedBadges": "Badges possédés ({{count}})",
+                "acquireDate": "Acquis le {{date}}"
+            }
         },
         "privacy": {
             "lastOnline": {
@@ -485,7 +455,7 @@
                 "hideFollowingDescription": "Masquez les utilisateurs que vous suivez depuis votre profil."
             },
             "options": {
-                "anybody": "Personne",
+                "anybody": "Tout le monde",
                 "friendsOnly": "Amis seulement",
                 "serversOnly": "Serveurs uniquement",
                 "friendsAndServers": "Amis et serveurs",
@@ -506,15 +476,15 @@
             "stopButton": "Arrêt",
             "downloadAppNotice": "Téléchargez l'application de bureau Nerimity pour utiliser cette fonctionnalité sans avoir à sélectionner un onglet de fenêtre.",
             "inputConstraints": {
-                "echoCancelation": "Annulation de l'Echo",
-                "echoCancelationDescription": "Empêche le micro de capter les sons des haut-parleurs.",
-                "noiseSuppression": "Suppression du Bruit",
-                "noiseSuppressionDescription": "Filtre les bruits de fond constants. (ventilos, etc.).",
-                "autoGainControl": "Volume Auto",
-                "autoGainControlDescription": "Ajuste automatiquement le volume pour maintenir un signal cohérent."
+                "echoCancelation": "Annulation d'écho",
+                "echoCancelationDescription": "Empêcher le microphone de détecter le son des hauts-parleurs",
+                "noiseSuppression": "Suppression de bruit",
+                "noiseSuppressionDescription": "Filtrer le bruit ambiant (Ventilateurs, bourdonnements)",
+                "autoGainControl": "Contrôle du gain automatique",
+                "autoGainControlDescription": "Ajuste automatiquement le niveau du volume pour maintenir un signal constant"
             },
-            "useTurn": "Utiliser les Serveurs Cloudflare TURN",
-            "useTurnDescription": "Utiliser les serveurs TURN pour une meilleure connexion"
+            "useTurn": "Utiliser les serveurs Cloudflare TURN",
+            "useTurnDescription": "Utiliser les serveurs TURN pour une meilleure connectivité"
         },
         "connections": {
             "thirdParty": {
@@ -525,7 +495,12 @@
             },
             "googleDescription": "Lier votre compte Google vous permettra de télécharger des fichiers dans Nerimity. Ces fichiers seront stockés sur votre Google Drive.",
             "linkButton": "Lien",
-            "unlinkButton": "Dissocier"
+            "unlinkButton": "Dissocier",
+            "googleDriveDescription": "Lier votre compte Google vous permettra de télécharger des fichiers sur Nerimity. Les fichiers seront stockés dans votre Google Drive.",
+            "driveWarning": {
+                "title": "Il n'est pas recommandé d'utiliser votre compte Google principal pour partager ou héberger des pièces jointes.",
+                "message": "En raison de la manière dont l'API Google Drive gère les métadonnées des fichiers, votre nom d'affichage et votre adresse e-mail Google apparaissent souvent dans les informations de fond de tout fichier que vous partagez.\n\nUtilisez un compte temporaire si vous décidez de continuer à utiliser Google Drive."
+            }
         },
         "interface": {
             "customCSS": "CSS personnalisé",
@@ -560,8 +535,8 @@
             "swipeToOpenDescription": "Ouvrez le tiroir de droite en balayant depuis le bord droit. Cela désactivera la fonction « balayer pour répondre ».",
             "headerTapToOpen": "Appuyez sur l'en-tête pour ouvrir",
             "headerTapToOpenDescription": "Ouvrez le tiroir de droite en cliquant sur l'en-tête. Cela vous permettra de balayer pour répondre.",
-            "reduceAnimations": "Réduire les Animations",
-            "reduceAnimationsDescription": "Ne pas jouer les GIFs animés et émojis tant qu'ils ne sont pas survolés ou touchés."
+            "reduceAnimations": "Réduire les animations",
+            "reduceAnimationsDescription": "Empêcher les GIFs et émojis animés de jouer avant d’être survolé ou tapoté."
         },
         "window": {
             "downloadAppNotice": "Pour modifier ces paramètres, vous devez télécharger l'application de bureau Nerimity.",
@@ -674,14 +649,14 @@
         "title": "Exclure {{username}}",
         "kickButton": "Exclure",
         "kicking": "Exclusion…",
-        "message": "Êtes-vous sûr de vouloir exclure <1>{{username}}</1>?"
+        "message": "Êtes-vous sûr de vouloir exclure <1>{{username}}</1> ?"
     },
     "editServerRolesModal": {
         "title": "Modifier les Rôles"
     },
     "banModal": {
-        "title": "Bannir {{username}}?",
-        "message": "Êtes-vous sûr de vouloir bannir <1>{{username}}</1>?",
+        "title": "Bannir {{username}} ?",
+        "message": "Êtes-vous sûr de vouloir bannir <1>{{username}}</1> ?",
         "deletePastMessagesCheckbox": "Supprimer les messages envoyés au cours des 7 dernières heures.",
         "banButton": "Bannir",
         "banning": "Bannissement…",
@@ -701,7 +676,8 @@
         "pinMessage": "Épingler",
         "unpinMessage": "Détacher",
         "copyHTML": "Copier le HTML",
-        "copyMessageLink": "Copier le lien du message"
+        "copyMessageLink": "Copier le lien du message",
+        "setReminder": "Définir un rappel"
     },
     "profile": {
         "followButton": "Suivre",
@@ -743,13 +719,13 @@
     },
     "posts": {
         "deletePostModal": {
-            "message": "Êtes-vous sûr de vouloir supprimer cette publication?",
-            "title": "Supprimer le post?"
+            "message": "Êtes-vous sûr de vouloir supprimer cette publication ?",
+            "title": "Supprimer le post ?"
         },
-        "postWasDeleted": "Cette publication a été supprimé!",
-        "someoneLikedYourPost": "<1>{{username}}</1> a aimé votre publication!",
-        "someoneFollowedYou": "<1>{{username}}</1> vous suit!",
-        "someoneRepliedToPost": "<1>{{username}}</1> a répondu à votre publication!",
+        "postWasDeleted": "Cette publication a été supprimé !",
+        "someoneLikedYourPost": "<1>{{username}}</1> a aimé votre publication !",
+        "someoneFollowedYou": "<1>{{username}}</1> vous suit !",
+        "someoneRepliedToPost": "<1>{{username}}</1> a répondu à votre publication !",
         "createAPostInputPlaceholder": "Créer une publication…",
         "replyInputPlaceholder": "Répondre…",
         "replyButton": "Répondre",
@@ -764,8 +740,8 @@
         "copyPostButton": "Copier le post",
         "sections": {
             "replies": "Réponses ({{count}})",
-            "likes": "Likes ({{count}})",
-            "reposts": "({{count}}) Républications"
+            "likes": "({{count}}) likes",
+            "reposts": "({{count}}) Republications"
         },
         "editPostModalTitle": "Modifier le post",
         "sort": {
@@ -775,8 +751,8 @@
             "mostLikedAllTime": "Les plus appréciés (de tous les temps)"
         },
         "postWarning": "Les contenus faisant l'apologie de l'automutilation sont interdits, des mesures seront prises à l'encontre du compte.",
-        "reposted": "Républié",
-        "repostedBy": "Républié par",
+        "reposted": "Republié",
+        "repostedBy": "Republié par",
         "replying": "Répondant à <1>{{username}}</1>",
         "pinned": "Épinglé"
     },
@@ -819,7 +795,7 @@
         "never": "jamais",
         "deletionNotice": "Votre compte et vos données seront supprimés dans 15 jours",
         "ipBanned": "Votre IP est bannie.",
-        "ipBanNotice": "Une personne utilisant la même addresse IP a été suspendue de Nerimity. Votre compte n'est pas impacté.",
+        "ipBanNotice": "Une personne utilisant la même adresse IP a été suspendue de Nerimity. Votre compte n'est pas impacté.",
         "by": "Par"
     },
     "dashboard": {
@@ -834,11 +810,12 @@
     },
     "status": {
         "online": "En ligne",
-        "ltp": "Cherche À Jouer",
+        "ltp": "Cherche à jouer",
         "dnd": "Ne Pas Déranger",
         "offline": "Hors Ligne",
         "appearAsOffline": "Apparaître Hors Ligne",
-        "afk": "Loin du clavier (AFK)"
+        "afk": "Loin du clavier (AFK)",
+        "lastOnline": "Dernière connexion à {{time}}"
     },
     "sidePane": {
         "addServer": "Ajouter Un Serveur",
@@ -871,11 +848,11 @@
         "emailNotice": "Veuillez confirmer votre adresse e-mail pour envoyer des messages.",
         "gifPicker": {
             "search": "Rechercher {{platform}}",
-            "noResults": "Aucun GIFs trouvés",
+            "noResults": "Aucun GIF trouvé",
             "favorites": {
                 "title": "Favoris",
-                "search": "Rechercher les favoris",
-                "noFavorites": "Aucun favoris pour le moment"
+                "search": "Chercher parmis les favoris",
+                "noFavorites": "Aucun favoris pour l'instant"
             }
         }
     },
@@ -965,8 +942,8 @@
             "description": "Administrateur de Nerimity"
         },
         "mod": {
-            "name": "Moderateur",
-            "description": "Moderateur de Nerimity"
+            "name": "Modérateur",
+            "description": "Modérateur de Nerimity"
         },
         "bunny": {
             "name": "Lapin",
@@ -1005,8 +982,8 @@
     "addFriendModal": {
         "title": "Ajouter Un Ami",
         "sendRequest": "Envoyer Une Demande",
-        "sending": "Envoie…",
-        "requestSent": "Demande envoyée!",
+        "sending": "Envoi…",
+        "requestSent": "Demande envoyée !",
         "description": "Saisissez le nom d'utilisateur et le nom d'utilisateur de votre ami pour l'ajouter.",
         "placeholder": "Nom d'utilisateur:ABC1",
         "errors": {
@@ -1017,7 +994,7 @@
     "activityNames": {
         "playing": "Joue à",
         "listening": "Écoute",
-        "watching": "Régarde à"
+        "watching": "Regarde"
     },
     "channelDrawer": {
         "customize": {
@@ -1058,7 +1035,7 @@
             "detailedEmbed": "Intégration détaillée"
         },
         "reactions": {
-            "more": "{{count}} plus"
+            "more": "et {{count}} autre(s)"
         },
         "deletedMessage": "Message a été supprimer.",
         "badge": {
@@ -1123,7 +1100,7 @@
         "joinButton": "Rejoindre",
         "joiningButton": "en train de rejoindre…",
         "visitButton": "Visiter",
-        "privateEmoji": "Cet emoji vient d'un serveur privé."
+        "private": "Cela provient d'un serveur privé"
     },
     "fileEmbed": {
         "expired": "Éxpiré {{time}}",
@@ -1187,22 +1164,22 @@
             "deafened": "Assourdi",
             "fullscreen": "Plein écran",
             "webcamModal": {
-                "title": "Partager la Webcam",
-                "error": "Le partage de caméra a échoué",
-                "shareCameraButton": "Partager la Caméra"
+                "title": "Partage de Webcam",
+                "error": "Échec du partage de la caméra",
+                "shareCameraButton": "Partager la caméra"
             },
             "screenShareModal": {
                 "title": "Partage d'écran",
-                "quality": "Qualitéé",
-                "framerate": "Images par seconde",
-                "shareSystemAudio": "Partager l'audio système",
+                "quality": "Qualité",
+                "framerate": "Nombre d'images par seconde",
+                "shareSystemAudio": "Partager l'audio du système",
                 "shareAppAudio": "Partager l'audio de l'application",
-                "chooseWindowButton": "Choisir une fenêtre"
+                "chooseWindowButton": "Choisir la fenêtre"
             }
         }
     },
     "inVoiceActions": {
-        "connectedFor": "Connecté pour <1>{{time}}</1>"
+        "connectedFor": "Connecté depuis <1>{{time}}</1>"
     },
     "informationDrawer": {
         "info": "Info",
@@ -1216,10 +1193,6 @@
         "admin": "Administrateur",
         "sortLatest": "Dernier",
         "sortOldest": "Le plus ancien"
-    },
-    "googleAccountLink": {
-        "linking": "Association de votre compte à Google…",
-        "success": "Compte lié ! Vous pouvez maintenant fermer cette fenêtre."
     },
     "deleteMessageModal": {
         "title": "Supprimer le message ?",
@@ -1257,7 +1230,7 @@
         "backButton": "Retour",
         "cancelButton": "Annuler",
         "deleteButton": "Supprimer",
-        "cannotBeUndone": "C'est irréversible !",
+        "cannotBeUndone": "Cette opération est irréversible !",
         "confirmButton": "Confirmer",
         "doneButton": "Fait",
         "saveButton": "Sauvegarder",
@@ -1275,10 +1248,10 @@
             "banner": "Bannière",
             "supportedFileTypes": "Pris en charge : {{extensions}}, Taille maximale : {{size}}",
             "browse": "Parcourir",
-            "remove": "Enlever",
-            "revert": "Revenir"
+            "remove": "Retirer",
+            "revert": "Annuler"
         },
-        "undoButton": "Défaire",
+        "undoButton": "Annuler",
         "closeButton": "Fermer",
         "editButton": "Modifier"
     },
@@ -1362,5 +1335,69 @@
         "dateTime": "{{date}} à {{time}}",
         "error": "erreur",
         "invalidTimezone": "fuseau horaire invalide"
+    },
+    "emojiModal": {
+        "title": "Emoji",
+        "defaultEmoji": "Émoji par défaut",
+        "customEmoji": "Émojis personnalisés"
+    },
+    "accountLink": {
+        "linking": "Connexion de votre compte avec {{service}}…",
+        "success": "Compte associé ! Vous pouvez maintenant fermer cette fenêtre."
+    },
+    "explore": {
+        "drawer": {
+            "title": "Explorer",
+            "servers": "Serveurs",
+            "bots": "Bots",
+            "themes": "Thèmes"
+        },
+        "bots": {
+            "title": "Explorer - Bots",
+            "noticeMessage": "Un bot peut être bump toutes les {{hours}} heures. Tous les bumps sont réinitialisées chaque {{date}}.",
+            "moderationNotice": "Les bots ne sont pas modérés par Nerimity. Veuillez signaler les bots malveillants ou qui enfreignent les conditions d'utilisation.",
+            "inviteButton": "Inviter",
+            "serverCount": "Dans {{count}} serveurs"
+        },
+        "themes": {
+            "title": "Explorer - Thèmes",
+            "themesHeaderDescription": "Personnalisez Nerimity avec un thème personnalisé.",
+            "officialThemes": "Thèmes officiels",
+            "communityThemes": "Thèmes de la communauté",
+            "noCommunityThemes": "Aucun thème communautaire trouvé.",
+            "fetchThemesError": "Impossible de récupérer les thèmes. Veuillez réessayer plus tard.",
+            "unlockDescription": "Cliquez pour explorer tous les thèmes de la communauté"
+        },
+        "servers": {
+            "title": "Explorer les serveurs",
+            "noticeMessage": "Un serveur peut être bump une fois toutes les {{hours}} heures. Les bumps sont réinitialisés tous les {{date}}.",
+            "moderationNotice": "Les serveurs ne sont pas modérés par Nerimity. Veuillez signaler les serveurs qui enfreignent les conditions d'utilisation.",
+            "sortMostBumps": "Plus de bumps",
+            "sortMostMembers": "Plus de membres",
+            "sortRecentlyAdded": "Récemment ajouté",
+            "sortRecentlyBumped": "Récemment bump",
+            "sortMostActive": "Les plus actifs",
+            "filterAll": "Tous",
+            "filterVerified": "Vérifié",
+            "pinnedServers": "Serveurs épinglés",
+            "recentlyBumped": "Serveurs récemment bump",
+            "memberCount": "{{count}} membres",
+            "lifetimeBumpCount": "{{count}} bumps totaux",
+            "visitServerButton": "Visiter",
+            "joinServerButton": "Rejoindre",
+            "bumpButton": "Bump ({{count}})",
+            "filterClans": "Clans"
+        },
+        "bumpModal": {
+            "title": "Bump {{name}}",
+            "bumpButton": "Bump"
+        },
+        "sort": "Trier",
+        "filter": "Filtrer",
+        "by": "Par",
+        "bumped": "Bump"
+    },
+    "clanModal": {
+        "title": "Clan"
     }
 }

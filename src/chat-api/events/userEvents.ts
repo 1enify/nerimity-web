@@ -20,7 +20,7 @@ export function onUserPresenceUpdate(payload: {
   userId: string;
   status?: UserStatus;
   custom?: string;
-  activity?: ActivityStatus;
+  activities?: ActivityStatus[];
 }) {
   const users = useUsers();
   const account = useAccount();
@@ -32,8 +32,8 @@ export function onUserPresenceUpdate(payload: {
   users.setPresence(payload.userId, {
     ...(payload.status !== undefined ? { status: payload.status } : undefined),
     ...(payload.custom !== undefined ? { custom: payload.custom } : undefined),
-    ...(payload.activity !== undefined
-      ? { activity: payload.activity }
+    ...(payload.activities !== undefined
+      ? { activities: payload.activities }
       : undefined)
   });
 }
@@ -49,7 +49,14 @@ export function onNotificationDismissed(payload: { channelId: string }) {
 }
 
 export function onUserUpdatedSelf(payload: Partial<SelfUser>) {
-  const { account, users } = useStore();
+  const { account, users, servers } = useStore();
+
+  const clanServerId = (payload.profile as any)?.clanServerId;
+  if (clanServerId) {
+    if (!payload.profile) payload.profile = {};
+    payload.profile.clan = servers.get(clanServerId)?.clan;
+  }
+
   account.setUser(payload);
 
   const user = users.get(account.user()?.id!);

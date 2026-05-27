@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js";
+import { Signal } from "solid-js";
+import { createStore } from "solid-js/store";
 
 export const StorageKeys = {
   USER_TOKEN: "userToken",
@@ -42,7 +43,8 @@ export const StorageKeys = {
   DASHBOARD_POST_SORT: "dashboardPostSort",
   rightDrawerMode: "rightDrawerMode",
   FAVORITE_GIFS: "favoriteGifs",
-  USE_LATEST_URL: "useLatestURL" // check for mobile and desktop app on wether to use the latest.nerimity.com url or not
+  USE_LATEST_URL: "useLatestURL", // check for mobile and desktop app on wether to use the latest.nerimity.com url or not
+  HOME_ICON: "homeIcon"
 } as const;
 
 export type StorageKeys = (typeof StorageKeys)[keyof typeof StorageKeys];
@@ -105,20 +107,22 @@ export function useLocalStorage<T>(
   defaultValue: T,
   stringMode = false
 ) {
-  const [value, setValue] = createSignal<T>(defaultValue);
+  const [value, setValue] = createStore<{ v: T }>({ v: defaultValue });
 
   const storedValue = stringMode
     ? getStorageString(key, defaultValue)
     : getStorageObject<T>(key, defaultValue);
-  setValue(() => storedValue as T);
+  setValue({ v: storedValue as T });
 
-  const setCustomValue = (value: T) => {
-    setValue(() => value);
-    if (stringMode) return setStorageString(key, value as string);
-    setStorageString(key, JSON.stringify(value));
+  const setCustomValue = (newValue: T) => {
+    setValue("v", newValue);
+    if (stringMode) return setStorageString(key, value.v as string);
+    setStorageString(key, JSON.stringify(value.v));
   };
 
-  return [value, setCustomValue] as const;
+  const getVal = () => value.v;
+
+  return [getVal, setCustomValue] as Signal<T>;
 }
 
 type VoiceInputMode = "OPEN" | "VOICE_ACTIVITY" | "PTT";

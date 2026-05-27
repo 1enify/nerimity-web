@@ -27,7 +27,6 @@ import { CustomLink } from "../ui/CustomLink";
 import Avatar from "../ui/Avatar";
 import UserPresence from "../user-presence/UserPresence";
 import { Markup } from "../Markup";
-import { bannerUrl } from "@/chat-api/store/useUsers";
 import { ServerMemberRoleModal } from "../member-context-menu/MemberContextMenu";
 import { electronWindowAPI } from "@/common/Electron";
 import { classNames, cn, conditionalClass } from "@/common/classNames";
@@ -53,6 +52,8 @@ import { userDetailsPreloader } from "@/common/createPreloader";
 import { UserActivity } from "../user-activity/UserActivity";
 import { Fonts } from "@/common/fonts";
 import { LogoutModal } from "../settings/LogoutModal";
+import { ClanTag } from "../clan-tag/ClanTag";
+import { generateUrl } from "@/common/image";
 
 interface Props {
   dmPane?: boolean;
@@ -374,7 +375,7 @@ const DesktopProfileFlyout = (props: {
           margin={props.dmPane ? 6 : 0}
           animate={!props.dmPane ? true : hover()}
           hexColor={user()?.hexColor}
-          url={bannerUrl(user()!)}
+          url={generateUrl(user()!, "banner")}
         >
           <Show when={isMe() && !props.showProfileSettings}>
             <Button
@@ -412,7 +413,11 @@ const DesktopProfileFlyout = (props: {
             <div class={styles.usernameDetails}>
               <CustomLink
                 decoration
-                style={{ color: "white", "line-height": "1" }}
+                style={{
+                  color: "white",
+                  "line-height": "1",
+                  "margin-right": "6px"
+                }}
                 href={RouterEndpoints.PROFILE(props.userId)}
               >
                 <Text
@@ -423,6 +428,9 @@ const DesktopProfileFlyout = (props: {
                 </Text>
                 <Text color="rgba(255,255,255,0.6)">:{user()!.tag}</Text>
               </CustomLink>
+              <Show when={details()?.profile?.clan}>
+                <ClanTag clan={details()?.profile?.clan!} hovered />
+              </Show>
               <Show when={details()?.followsYou}>
                 <div class={styles.followsYou}>{t("profile.followsYou")}</div>
               </Show>
@@ -523,9 +531,21 @@ const DesktopProfileFlyout = (props: {
   const ProfileArea = () => {
     const memberRoles = () => serverMembers.roles(member()!, true) || [];
 
+    const showRoles = () => {
+      if (!server()) return false;
+      if (
+        serverMembers.hasPermission(
+          accountMember()!,
+          ROLE_PERMISSIONS.MANAGE_ROLES
+        )
+      )
+        return true;
+      return memberRoles().length;
+    };
+
     return (
       <>
-        <Show when={server()}>
+        <Show when={showRoles()}>
           <div class={styles.section}>
             <FlyoutTitle
               primaryColor={colors()?.primary || undefined}

@@ -12,7 +12,8 @@ import {
   RawVoice,
   RawNotice,
   RawReminder,
-  RawServerFolder
+  RawServerFolder,
+  RawServerClan
 } from "../RawData";
 
 export interface AuthenticatedPayload {
@@ -28,6 +29,8 @@ export interface AuthenticatedPayload {
   inbox: RawInboxWithoutChannel[];
   lastSeenServerChannelIds: Record<string, number>; // { [channelId]: timestamp }
   voiceChannelUsers: RawVoice[];
+  newToken?: string;
+  sessionId: string;
 }
 
 interface MessageMention {
@@ -78,5 +81,6 @@ export interface SelfUser {
   reminders: RawReminder[];
   profile?: {
     font?: number;
+    clan?: RawServerClan;
   };
 }

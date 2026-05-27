@@ -40,6 +40,7 @@ import { t } from "@nerimity/i18lite";
 
 import { favoritesStore } from "@/common/favoritesStore";
 import Icon from "../icon/Icon";
+import { generateUrl } from "@/common/image";
 
 const [gifPickerSearch, setGifPickerSearch] = createSignal("");
 
@@ -48,6 +49,7 @@ export function EmojiPicker(props: {
   showGifPicker?: boolean;
   heightOffset?: number;
   close: () => void;
+  serverId?: string;
   onClick: (shortcode: string, shiftDown?: boolean) => void;
   tab?: "EMOJI" | "GIF";
 }) {
@@ -102,9 +104,10 @@ export function EmojiPicker(props: {
   const customEmojis = () => {
     return servers
       .emojisUpdatedDupName()
+      .filter((e) => (props.serverId ? e.serverId === props.serverId : true))
       .map((e) => {
         const server = servers.get(e.serverId!)!;
-        const url = server.avatarUrl();
+        const url = generateUrl(server, "avatar");
 
         return {
           id: e.id,
@@ -160,7 +163,7 @@ export function EmojiPicker(props: {
         <EmojiPickerComponent
           class={cn(styles.emojiPicker, "emoji-picker")}
           focusOnMount={!isMobileAgent()}
-          spriteUrl="/assets/emojiSprites-16.png"
+          spriteUrl="/assets/emojiSprites-17.png"
           emojis={emojis()}
           customEmojis={customEmojis()}
           onEmojiClick={(e: { name?: string; short_names?: string[] }) =>
@@ -632,6 +635,7 @@ const GifCategoryItem = (props: {
 export const FloatingEmojiPicker = (props: {
   x: number;
   y: number;
+  serverId?: string;
   close: () => void;
   onClick: (shortcode: string) => void;
 }) => {
@@ -642,7 +646,11 @@ export const FloatingEmojiPicker = (props: {
 
   return (
     <FloatingInScreen close={props.close} x={props.x} y={props.y}>
-      <EmojiPicker onClick={onPick} close={props.close} />
+      <EmojiPicker
+        serverId={props.serverId}
+        onClick={onPick}
+        close={props.close}
+      />
     </FloatingInScreen>
   );
 };

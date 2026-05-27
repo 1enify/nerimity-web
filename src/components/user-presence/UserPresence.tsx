@@ -8,7 +8,7 @@ import Icon from "../ui/icon/Icon";
 import { getActivityIconName } from "@/components/activity/Activity";
 import { Tooltip } from "../ui/Tooltip";
 import { formatTimestamp } from "@/common/date";
-
+import { t } from "@nerimity/i18lite";
 import { getActivityType } from "@/common/activityType";
 
 // show full will disable overflow eclipses
@@ -23,13 +23,16 @@ const UserPresence = (props: {
   useTitle?: boolean;
   class?: string;
   customStatusOverride?: string;
+  showActivityCount?: boolean;
 }) => {
   const { users } = useStore();
   const user = () => users.get(props.userId);
 
   const statusDetails = () => userStatusDetail(user()?.presence()?.status || 0);
-  const activity = () =>
-    props.hideActivity ? undefined : user()?.presence()?.activity;
+
+  const activities = () => user()?.presence()?.activities;
+
+  const activity = () => (props.hideActivity ? undefined : activities()?.[0]);
 
   const lastOnlineAt = () => {
     return user()?.lastOnlineAt;
@@ -71,17 +74,28 @@ const UserPresence = (props: {
     return activity()?.name;
   };
 
-  const name = () => {
+  const name = (showActivityCount?: boolean) => {
     return (
       <Switch fallback={statusDetails()?.name()}>
         <Match when={lastOnlineAt() && !user()?.presence()?.status}>
           <div class={styles.lastOnline}>
-            Last online {formatTimestamp(lastOnlineAt()!)}
+            {t("status.lastOnline", { time: formatTimestamp(lastOnlineAt()!) })}
           </div>
         </Match>
         <Match when={activity()}>
           <span class={styles.activity}>
-            <span class={styles.activityAction}>{action()}</span>
+            <span class={styles.activityAction}>
+              {action()}
+              <Show
+                when={
+                  showActivityCount && activities() && activities()!.length > 1
+                }
+              >
+                <span class={styles.activityCount}>
+                  +{activities()!.length - 1}
+                </span>
+              </Show>
+            </span>
             <span class={styles.activityName}> {activityName()}</span>
           </span>
         </Match>
@@ -141,7 +155,7 @@ const UserPresence = (props: {
           anchor={props.tooltipAnchor}
           class={styles.value}
         >
-          {name()}
+          {name(!!props.showActivityCount)}
         </Tooltip>
       </div>
     </Show>

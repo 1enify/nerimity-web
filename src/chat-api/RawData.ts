@@ -4,6 +4,7 @@ export interface RawServer {
   hexColor: string;
   defaultChannelId: string;
   systemChannelId?: string;
+  clan?: RawServerClan;
   avatar?: string;
   banner?: string;
   defaultRoleId: string;
@@ -20,14 +21,18 @@ export interface RawServer {
     scheduledAt: number;
   };
 }
+export interface RawServerClan {
+  serverId?: string;
+  tag: string;
+  icon: string;
+}
 
-
-export const InventoryItemType ={
+export const InventoryItemType = {
   Badge: "badge"
 } as const;
 export interface RawInventoryItem {
   id: string;
-  itemType: typeof InventoryItemType[keyof typeof InventoryItemType];
+  itemType: (typeof InventoryItemType)[keyof typeof InventoryItemType];
   userId: string;
   itemId: string;
   acquiredAt: number;
@@ -76,6 +81,7 @@ export interface RawMessage {
     avatarUrl?: string;
     profile?: {
       font?: number;
+      clan?: RawServerClan;
     };
   };
   type: MessageType;
@@ -182,12 +188,13 @@ export interface RawUser {
   lastOnlineAt?: number;
   profile?: {
     font?: number;
+    clan?: RawServerClan;
   };
 }
 
 export interface RawUserConnection {
   id: string;
-  provider: "GOOGLE";
+  provider: "GOOGLE" | "GOOGLE_DRIVE";
   connectedAt: number;
 }
 
@@ -246,6 +253,7 @@ export interface RawTicket {
   openedBy?: RawUser;
   openedAt: Date;
   seen?: boolean;
+  ignoredByUsers?: { userId: string }[];
 }
 
 export interface RawChannel {
@@ -342,7 +350,7 @@ export interface RawPresence {
   userId: string;
   custom?: string;
   status: number;
-  activity?: ActivityStatus;
+  activities?: ActivityStatus[];
 }
 
 export interface RawExploreItem {

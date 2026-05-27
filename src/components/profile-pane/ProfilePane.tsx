@@ -12,7 +12,12 @@ import {
   Show,
   untrack
 } from "solid-js";
-import { FriendStatus, RawBotCommand, RawUser } from "@/chat-api/RawData";
+import {
+  ActivityStatus,
+  FriendStatus,
+  RawBotCommand,
+  RawUser
+} from "@/chat-api/RawData";
 import {
   blockUser,
   followUser,
@@ -24,7 +29,7 @@ import {
   UserDetails
 } from "@/chat-api/services/UserService";
 import useStore from "@/chat-api/store/useStore";
-import { bannerUrl, User } from "@/chat-api/store/useUsers";
+import { User } from "@/chat-api/store/useUsers";
 import {
   calculateTimeElapsedForActivityStatus,
   formatTimestamp,
@@ -77,6 +82,8 @@ import DeleteConfirmModal from "../ui/delete-confirm-modal/DeleteConfirmModal";
 import { getActivityType } from "@/common/activityType";
 import { getFont } from "@/common/fonts";
 import { Modal } from "../ui/modal";
+import { ClanTag } from "../clan-tag/ClanTag";
+import { generateUrl } from "@/common/image";
 
 const ActionButtonsContainer = styled(FlexRow)`
   align-self: center;
@@ -231,7 +238,7 @@ export default function ProfilePane() {
                   animate
                   margin={0}
                   hexColor={user()?.hexColor}
-                  url={bannerUrl(user()!)}
+                  url={generateUrl(user()!, "banner")}
                   class={css`
                     z-index: 111;
                   `}
@@ -278,6 +285,9 @@ export default function ProfilePane() {
                         </span>
                         <span class={styles.tag}>{`:${user()!.tag}`}</span>
                       </div>
+                      <Show when={userDetails()?.profile?.clan}>
+                        <ClanTag clan={userDetails()?.profile?.clan!} hovered />
+                      </Show>
                       <Show when={userDetails()?.followsYou}>
                         <div class={styles.followsYou}>
                           {t("profile.followsYou")}
@@ -853,7 +863,32 @@ const UserActivity = (props: {
 }) => {
   const { users } = useStore();
   const user = () => users.get(props.userId);
-  const activity = () => user()?.presence()?.activity;
+  const activities = () => user()?.presence()?.activities;
+
+  return (
+    <Show when={activities()?.length}>
+      <div>
+        <For each={activities()!}>
+          {(activity) => (
+            <UserActivityItem
+              activity={activity}
+              color={props.color}
+              paneBgColor={props.paneBgColor}
+            />
+          )}
+        </For>
+      </div>
+    </Show>
+  );
+};
+
+const UserActivityItem = (props: {
+  activity: ActivityStatus;
+  color?: string;
+  paneBgColor: string;
+}) => {
+  const activity = () => props.activity;
+
   const [playedFor, setPlayedFor] = createSignal("");
 
   const activityType = () => getActivityType(activity());

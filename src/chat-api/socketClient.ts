@@ -30,6 +30,7 @@ import {
   onServerChannelOrderUpdated,
   onServerChannelPermissionsUpdated,
   onServerChannelUpdated,
+  onServerClanUpdated,
   onServerEmojiAdd,
   onServerEmojiRemove,
   onServerEmojiUpdate,
@@ -64,19 +65,25 @@ import {
   onUserUpdated,
   onUserUpdatedSelf
 } from "./events/userEvents";
-import { onCleanup, onMount } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 import {
   onVoiceSignalReceived,
   onVoiceUserJoined,
   onVoiceUserLeft
 } from "./events/voiceEvents";
+import { reactNativeAPI, ReactSocketIO } from "@/common/ReactNative";
+import { isExperimentEnabled } from "@/common/experiments";
 
-const socket = io(env.WS_URL || env.SERVER_URL, {
-  transports: ["websocket"],
-  autoConnect: false
-});
+const socket =
+  reactNativeAPI()?.isReactNative && isExperimentEnabled("RN_NATIVE_WS")()
+    ? new ReactSocketIO(env.WS_URL || env.SERVER_URL)
+    : io(env.WS_URL || env.SERVER_URL, {
+        transports: ["websocket"],
+        autoConnect: false
+      });
 
 let token: undefined | string;
+const [sessionId, setSessionId] = createSignal<string | null>(null);
 
 type ValueOf<T> = T[keyof T];
 
@@ -85,8 +92,13 @@ export default {
     token = newToken;
     socket.connect();
   },
+  setSessionId,
+  sessionId,
   updateToken(newToken: string) {
     token = newToken;
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   },
   id: () => socket.id,
   socket,
@@ -181,6 +193,8 @@ socket.on(
 socket.on(ServerEvents.SERVER_CHANNEL_CREATED, onServerChannelCreated);
 socket.on(ServerEvents.SERVER_CHANNEL_UPDATED, onServerChannelUpdated);
 socket.on(ServerEvents.SERVER_CHANNEL_DELETED, onServerChannelDeleted);
+socket.on(ServerEvents.SERVER_CLAN_UPDATED, onServerClanUpdated);
+
 socket.on(ServerEvents.MESSAGE_REACTION_ADDED, onMessageReactionAdded);
 socket.on(ServerEvents.MESSAGE_REACTION_REMOVED, onMessageReactionRemoved);
 socket.on(ServerEvents.VOICE_USER_JOINED, onVoiceUserJoined);

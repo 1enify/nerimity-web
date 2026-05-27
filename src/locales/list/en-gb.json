@@ -156,7 +156,8 @@
     "afk": "Away From Keyboard",
     "dnd": "Do Not Disturb",
     "offline": "Offline",
-    "appearAsOffline": "Appear As Offline"
+    "appearAsOffline": "Appear As Offline",
+    "lastOnline": "Last online {{time}}"
   },
   "sidePane": {
     "home": "Home",
@@ -288,7 +289,12 @@
       "lifetimeBumpCount": "{{count}} lifetime bumps",
       "visitServerButton": "Visit",
       "joinServerButton": "Join",
-      "bumpButton": "Bump ({{count}})"
+      "bumpButton": "Bump ({{count}})",
+      "filterClans": "Clans"
+    },
+    "bumpModal": {
+      "title": "Bump {{name}}",
+      "bumpButton": "Bump"
     },
     "sort": "Sort",
     "filter": "Filter",
@@ -330,7 +336,8 @@
         "permissions": "Permissions",
         "emoji": "Emoji",
         "notifications": "Notifications",
-        "external-embed": "External Embed"
+        "external-embed": "External Embed",
+        "clanTag": "Clan Tag"
       },
       "bans": {
         "sort": {
@@ -509,6 +516,12 @@
           "hideMembers": "Hide Members List",
           "hideActivities": "Hide Activity List"
         }
+      },
+      "clans": {
+        "tag": "Tag",
+        "icon": "Icon",
+        "enableClanTag": "Enable Clan Tag",
+        "verifiedServerOnly": "Clan Tag is only available for verified servers."
       }
     },
     "rolePermissions": {
@@ -569,7 +582,8 @@
       "connections": "Connections",
       "profile": "Profile",
       "source": "Source",
-      "changes": "Changes"
+      "changes": "Changes",
+      "sessions": "Sessions"
     },
     "language": {
       "reloadNotice": "You must reload the app to fully apply the new language.",
@@ -730,7 +744,12 @@
         "unauthorizeButton": "Unauthorise",
         "unauthorizing": "Un-authorising…"
       },
-      "googleDescription": "Linking your Google account will allow you to upload files in Nerimity. Files will be stored in your Google Drive.",
+      "driveWarning": {
+        "title": "Using your primary Google account to share or host attachments is not recommended.",
+        "message": "Due to the way the Google Drive API handles file metadata, your display name and Google email address are often visible in the background data of any file you share. \n\nUse a throwaway account if you choose to continue using Google Drive."
+      },
+      "googleDriveDescription": "Linking your Google account will allow you to upload files in Nerimity. Files will be stored in your Google Drive.",
+      "googleDescription": "Linking your Google account will allow you to login using Google quickly and easily.",
       "linkButton": "Link",
       "unlinkButton": "Unlink"
     },
@@ -939,6 +958,11 @@
     "transferOwnership": "Transfer Ownership",
     "callVolume": "Call Volume"
   },
+  "emojiModal": {
+    "title": "Emoji",
+    "defaultEmoji": "Default Emoji",
+    "customEmoji": "Custom Emoji"
+  },
   "nicknameChangeModal": {
     "title": "Update Server Profile",
     "description": "Everyone in this server will see this nickname.",
@@ -996,7 +1020,8 @@
     "markUnread": "Mark Unread",
     "pinMessage": "Pin",
     "unpinMessage": "Unpin",
-    "copyMessageLink": "Copy Message Link"
+    "copyMessageLink": "Copy Message Link",
+    "setReminder": "Set Reminder"
   },
   "profile": {
     "followerCount": "{{count}} Followers",
@@ -1156,19 +1181,19 @@
     "addButton": "Add bot",
     "permissions": "Bot Permissions"
   },
-  "googleAccountLink": {
-    "linking": "Linking your account with Google…",
+  "accountLink": {
+    "linking": "Linking your account with {{service}}…",
     "success": "Account linked! You may now close this window."
   },
   "invite": {
     "loading": "Loading Invite…",
     "invalid": "Invalid Invite Code",
-    "privateEmoji": "This emoji is from a private server.",
     "joinButton": "Join",
     "joiningButton": "Joining…",
     "visitButton": "Visit",
     "member": "member",
-    "members": "members"
+    "members": "members",
+    "private": "This is from a private server"
   },
   "fileEmbed": {
     "viewImage": "View Image",
@@ -1370,5 +1395,8 @@
     "dateTime": "{{date}} at {{time}}",
     "error": "error",
     "invalidTimezone": "invalid time zone"
+  },
+  "clanModal": {
+    "title": "Clan"
   }
 }

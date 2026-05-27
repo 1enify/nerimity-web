@@ -1,5 +1,5 @@
 import { runWithContext } from "@/common/runWithContext";
-import { batch } from "solid-js";
+import { batch, createMemo } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
 import { useWindowProperties } from "../../common/useWindowProperties";
 import { dismissChannelNotification } from "../emits/userEmits";
@@ -33,6 +33,8 @@ import useServers from "./useServers";
 import { loadSimplePeer } from "@/components/LazySimplePeer";
 import { getCustomSound, playSound } from "@/common/Sound";
 import { getStorageBoolean, StorageKeys } from "@/common/localStorage";
+import { isExperimentEnabled } from "@/common/experiments";
+import { reactNativeAPI } from "@/common/ReactNative";
 
 export type Channel = Omit<RawChannel, "recipient"> & {
   updateLastSeen(this: Channel, timestamp?: number): void;
@@ -225,6 +227,10 @@ function recipient(this: Channel) {
 }
 
 async function joinCall(this: Channel, reconnect = false) {
+  if (isExperimentEnabled("RN_NATIVE_WEBRTC")() && reactNativeAPI()?.joinCall) {
+    reactNativeAPI()?.joinCall(this.id);
+    return;
+  }
   const { setCurrentChannelId } = useVoiceUsers();
   await loadSimplePeer();
   if (getStorageBoolean(StorageKeys.voiceUseTurnServers, true)) {
@@ -324,7 +330,9 @@ const get = (channelId?: string) => {
   return channels[channelId];
 };
 
-const array = () => Object.values(channels) as Channel[];
+const array = createMemo(() => {
+  return Object.values(channels) as Channel[];
+});
 
 const serverChannelsWithPerm = () => {
   const serverMembers = useServerMembers();
